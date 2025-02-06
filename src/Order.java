@@ -11,16 +11,16 @@ public class Order {
         this.ecoFriendly = ecoFriendly;
     }
 
+    public double applyPremiumDiscount(double cost) {
+        return premiumMember ? cost * 0.8 : cost;
+    }
+
     public double getWeight() {
         return weight;
     }
 
     public double getDistance() {
         return distance;
-    }
-
-    public boolean isPremiumMember() {
-        return premiumMember;
     }
 
     public boolean isEcoFriendly() {
