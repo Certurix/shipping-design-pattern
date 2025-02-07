@@ -1,0 +1,59 @@
+@startuml
+skinparam linetype ortho
+
+class ShippingCalculator {
+	#ShippingCostStrategy strategy
+	+ShippingCalculator(ShippingCostStrategy strategy)
+	+calculateShipping(order: Order)
+}
+ShippingCalculator --> "1 #strategy" ShippingCostStrategy
+
+interface ShippingCostStrategy {
+	+calculateCost(order: Order) : double
+}
+
+class Order {
+	- double weight
+	- String destination
+	- double distance
+	- boolean premiumMember
+	- boolean ecoFriendly
+	+ applyPremiumDiscount() : double
+	+ getWeight() : double
+	+ getDestination() : String
+	+ getDistance() : double
+	+ isEcoFriendly() : boolean
+}
+
+class StandardShippingStrategy {
+	+ calculateCost(order: Order) : double
+}
+
+class ExpressShippingStrategy {
+	+ calculateCost(order: Order) : double
+}
+
+class InternationalShippingStrategy {
+	+ calculateCost(order: Order) : double
+}
+
+class EcoShippingStrategy {
+	+ calculateCost(order: Order) : double
+}
+
+class SameDayShippingStrategy {
+	+ calculateCost(order: Order) : double
+}
+
+' Relations entre les classes
+ShippingCalculator ..> Order
+StandardShippingStrategy -up-|> ShippingCostStrategy
+ExpressShippingStrategy -up-|> ShippingCostStrategy
+InternationalShippingStrategy -up-|> ShippingCostStrategy
+EcoShippingStrategy -up-|> ShippingCostStrategy
+SameDayShippingStrategy -up-|> ShippingCostStrategy
+
+note right of ShippingCalculator::calculateShipping
+  strategy.calculateCost(order)
+end note
+@enduml
