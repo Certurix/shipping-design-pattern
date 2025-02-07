@@ -46,7 +46,7 @@ class SameDayShippingStrategy {
 }
 
 ' Relations entre les classes
-ShippingCalculator ..> Order
+ShippingCalculator .left.> Order
 StandardShippingStrategy -up-|> ShippingCostStrategy
 ExpressShippingStrategy -up-|> ShippingCostStrategy
 InternationalShippingStrategy -up-|> ShippingCostStrategy
